@@ -24,12 +24,6 @@ class Employee {
             employeeDepartment = department;
             employeeSalary = salary;
         }
-        Employee(int id, string name, string department, double salary){
-            employeeId = id;
-            employeeName = name;
-            employeeDepartment = department;
-            employeeSalary = salary;
-        }
         void calculatePay(){
             cout << "Salary for " << employeeName << " (ID: " << employeeId << ") is Rs" << employeeSalary << endl;
         }
@@ -58,6 +52,9 @@ class Employee {
             employeeSalary = salary;
             cout << "Profile updated for " << employeeName << " (ID: " << employeeId << "). New department: " << employeeDepartment << ", New salary: Rs" << employeeSalary << endl;
         }
+        void displayProfile(){
+            cout << "Employee ID: " << employeeId << ", Name: " << employeeName << ", Department: " << employeeDepartment << ", Salary: Rs" << employeeSalary << endl;
+        }
 };
 int main() {
     Employee emp1;
@@ -70,10 +67,15 @@ int main() {
     emp3.updateProfile("Finance");
     emp3.updateProfile(60000);
     emp3.updateProfile("IT", 70000);
-
-    Employee emp2(102, "Bob" , "Marketing", 50000);
-    emp2.calculatePay();
-    emp2.updateProfile("Marketing", 55000);
+    Employee emp4(emp3);
+    Employee emp5(102, "Bob" , "Marketing", 50000);
+    emp5.calculatePay();
+    emp5.updateProfile("Marketing", 55000);
+    emp1.displayProfile();
+    emp2.displayProfile();
+    emp3.displayProfile();
+    emp4.displayProfile();
+    emp5.displayProfile();
 
     return 0;
 }
