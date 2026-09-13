@@ -6,6 +6,15 @@ struct ListNode{
     ListNode *next ;
 } ;
 
+ListNode* insertNodeAtStart(ListNode *head, int val){
+    ListNode *temp = new ListNode ;
+    temp->data = val ;
+    temp->next = NULL ;
+    temp->next = head ;
+    head = temp ;
+    return head ;
+}
+
 ListNode* insertNodeAtEnd(ListNode *head,int val){
     if(head==NULL){
         head= new ListNode ;
@@ -24,15 +33,40 @@ ListNode* insertNodeAtEnd(ListNode *head,int val){
     return head ;
 }
 
-void deleteNodeAtEnd(ListNode * head){
+ListNode* deleteNodeAtEnd(ListNode * head){
     ListNode *itr = head ;
+    if(itr==NULL){
+        return NULL ;
+    }
+    if (itr->next==NULL){
+        delete itr ;
+        head = NULL ;
+        return head ;
+    }
     while(itr->next->next!=NULL){
         itr= itr->next ;
     }
     ListNode *temp = itr->next ;
     itr->next= NULL ;
-    free(temp) ;
+    delete temp ;
     temp = NULL ;
+    return head ;
+}
+
+ListNode* deleteNodeAtStart(ListNode *head){
+    ListNode *temp = head ;
+    if(head==NULL){
+        return head ;
+    }
+    if(head->next==NULL){
+        delete head ;
+        head = NULL ;
+        return head ;
+    }
+    head= head->next ;
+    delete temp ;
+    temp = nullptr ;
+    return head ;
 }
 
 void displayLinkedList(ListNode *head){
@@ -43,24 +77,6 @@ void displayLinkedList(ListNode *head){
     }
     cout<<"nullptr\n" ;
 }
-
-ListNode* insertNodeAtStart(ListNode *head, int val){
-    ListNode *temp = new ListNode ;
-    temp->data = val ;
-    temp->next = NULL ;
-    temp->next = head ;
-    head = temp ;
-    return head ;
-}
-
-ListNode* deleteNodeAtStart(ListNode *head){
-    ListNode *temp = head ;
-    head= head->next ;
-    free(temp) ;
-    temp = nullptr ;
-    return head ;
-}
-
 
 int main() 
 {
@@ -73,7 +89,7 @@ int main()
         head= insertNodeAtEnd(head, temp) ;
     }
     displayLinkedList(head) ;
-    deleteNodeAtEnd(head);
+    head = deleteNodeAtEnd(head);
     displayLinkedList(head) ;
     head = deleteNodeAtStart(head) ;
     displayLinkedList(head) ;
